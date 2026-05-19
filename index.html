@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BW Forsyth — DD Tracker</title>
@@ -310,12 +308,11 @@
 <body>
 
 <!-- ── Lock Screen ─────────────────────────────────────────────── -->
-<div id="lock-screen">
+<div id="lock-screen" class="hidden">
   <div class="lock-card">
     <div class="lock-title">BW Forsyth Partners</div>
     <div class="lock-sub">DD Tracker — Restricted Access</div>
-    <input class="lock-input" id="lock-input" type="password" placeholder="Enter password"
-      onkeydown="if(event.key==='Enter')checkPassword()" />
+    <input class="lock-input" id="lock-input" type="password" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPassword()">
     <button class="lock-btn" onclick="checkPassword()">Access tracker</button>
     <div class="lock-error" id="lock-error"></div>
   </div>
@@ -323,13 +320,13 @@
 </div>
 
 <!-- ── Main App ────────────────────────────────────────────────── -->
-<div class="shell" id="app" style="display:none;">
+<div class="shell" id="app" style="display: block;">
 
   <div class="header">
     <div>
       <div class="org-badge">BW Forsyth Partners</div>
       <h1>Due Diligence Tracker</h1>
-      <div class="header-sub" id="today-label"></div>
+      <div class="header-sub" id="today-label">May 19, 2026</div>
     </div>
     <div class="save-status" id="save-status">All changes saved</div>
   </div>
@@ -344,8 +341,63 @@
   <!-- ── PROJECT CHIPOTLE ACTIVE ────────────────────────────────── -->
   <div id="chipotle-active" class="section active">
     <button class="add-btn" onclick="openAddModal('chipotle')">+ Add action item</button>
-    <div id="chipotle-filter-bar" class="filter-bar"></div>
-    <div id="chipotle-groups"></div>
+    <div id="chipotle-filter-bar" class="filter-bar"><button class="filter-btn active">All</button><button class="filter-btn">Not started</button><button class="filter-btn">In-Progress</button><button class="filter-btn">On-Hold</button><button class="filter-btn">Parking Lot</button></div>
+    <div id="chipotle-groups"><div class="section-group-header" style="color: var(--navy);">📅 Due This Week <span class="section-group-count">1</span></div><div class="card due-section-card due-week"><table style="width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed;"><thead><tr>
+    <th style="width:32%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Action item</th>
+    <th style="width:13%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">DD Section</th>
+    <th style="width:10%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Owner</th>
+    <th style="width:10%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Due</th>
+    <th style="width:12%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Status</th>
+    <th style="width:23%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Notes</th>
+  </tr></thead><tbody><tr>
+      <td style="padding:8px 10px 8px 0;border-bottom:1px solid var(--border);font-size:13px;">Kick off BofA</td>
+      <td style="padding:8px 10px 8px 0;border-bottom:1px solid var(--border);">
+        <span class="badge badge-navy" style="font-size:10px;">Financing</span></td>
+      <td style="padding:8px 10px 8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-muted);">House</td>
+      <td style="padding:8px 10px 8px 0;border-bottom:1px solid var(--border);font-size:12px;font-family:'DM Mono',monospace;color:var(--red-text);">5/22/26</td>
+      <td style="padding:8px 10px 8px 0;border-bottom:1px solid var(--border);">
+        <span class="badge badge-blue" style="font-size:10px;">In-Progress</span></td>
+      <td style="padding:8px 10px 8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-muted);">Get B of A Kicked Off</td>
+    </tr></tbody></table></div><div style="border-top: 2px solid var(--border); margin: 18px 0px 14px; position: relative;"><span style="position:absolute;top:-9px;left:0;background:var(--bg);padding-right:10px;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);">By DD Section</span></div><div class="section-group-header"><span>Financial</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Legal</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Financing</span><span class="section-group-count">2</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><table style="width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed;"><thead><tr>
+    <th style="width:28%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Action item</th>
+    <th style="width:12%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Owner</th>
+    <th style="width:9%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Due</th>
+    <th style="width:12%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Status</th>
+    <th style="width:31%;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--border);">Notes</th>
+    <th style="width:8%;border-bottom:1px solid var(--border);"></th>
+  </tr></thead><tbody><tr>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <div class="ecell" contenteditable="true" data-placeholder="Action item">Kick off BofA</div></td>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <select class="dd-owner-sel" style="font-family:'DM Sans',sans-serif;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--bg);color:var(--text);cursor:pointer;outline:none;width:100%;"><option value="House" selected="">House</option><option value="Banks">Banks</option><option value="Arthur">Arthur</option><option value="Joel">Joel</option><option value="Chris">Chris</option><option value="Eric">Eric</option><option value="Spencer">Spencer</option><option value="Jessica">Jessica</option><option value="Peter">Peter</option><option value="Frank">Frank</option><option value="Kurt">Kurt</option><option value="__custom__">Other…</option></select>
+        <input class="dd-owner-custom" type="text" placeholder="Name…" value="" style="display:none;margin-top:4px;font-family:'DM Sans',sans-serif;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;outline:none;width:100%;background:var(--bg);">
+      </td>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <div class="ecell" contenteditable="true" data-placeholder="Date">5/22/26</div></td>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <select class="dd-status-sel" style="font-family:'DM Sans',sans-serif;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--bg);color:var(--text);cursor:pointer;outline:none;width:100%;"><option value="Not started">Not started</option><option value="In-Progress" selected="">In-Progress</option><option value="On-Hold">On-Hold</option><option value="Parking Lot">Parking Lot</option><option value="Complete">Complete</option></select>
+      </td>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <div class="ecell" contenteditable="true" data-placeholder="Notes">Get B of A Kicked Off</div></td>
+      <td style="padding:9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <button class="del-btn" onclick="delRow('chipotle',0)">✕</button></td>
+    </tr><tr>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <div class="ecell" contenteditable="true" data-placeholder="Action item">PNC Feedback</div></td>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <select class="dd-owner-sel" style="font-family:'DM Sans',sans-serif;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--bg);color:var(--text);cursor:pointer;outline:none;width:100%;"><option value="House" selected="">House</option><option value="Banks">Banks</option><option value="Arthur">Arthur</option><option value="Joel">Joel</option><option value="Chris">Chris</option><option value="Eric">Eric</option><option value="Spencer">Spencer</option><option value="Jessica">Jessica</option><option value="Peter">Peter</option><option value="Frank">Frank</option><option value="Kurt">Kurt</option><option value="__custom__">Other…</option></select>
+        <input class="dd-owner-custom" type="text" placeholder="Name…" value="" style="display:none;margin-top:4px;font-family:'DM Sans',sans-serif;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;outline:none;width:100%;background:var(--bg);">
+      </td>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <div class="ecell" contenteditable="true" data-placeholder="Date">6/5/26</div></td>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <select class="dd-status-sel" style="font-family:'DM Sans',sans-serif;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:3px 6px;background:var(--bg);color:var(--text);cursor:pointer;outline:none;width:100%;"><option value="Not started">Not started</option><option value="In-Progress" selected="">In-Progress</option><option value="On-Hold">On-Hold</option><option value="Parking Lot">Parking Lot</option><option value="Complete">Complete</option></select>
+      </td>
+      <td style="padding:9px 10px 9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <div class="ecell" contenteditable="true" data-placeholder="Notes">Await feedback from PNC on financing</div></td>
+      <td style="padding:9px 0;border-bottom:1px solid var(--border);vertical-align:top;">
+        <button class="del-btn" onclick="delRow('chipotle',1)">✕</button></td>
+    </tr></tbody></table></div><div class="section-group-header"><span>Real Estate</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>CPD</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>IT</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Operations / Supply Chain</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Sales &amp; Marketing</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div></div>
   </div>
 
   <!-- ── PROJECT CHIPOTLE COMPLETED ────────────────────────────── -->
@@ -364,7 +416,7 @@
             <th style="width:29%">Notes</th>
             <th style="width:8%"></th>
           </tr></thead>
-          <tbody id="chipotle-completed-body"></tbody>
+          <tbody id="chipotle-completed-body"><tr><td colspan="6" style="color:var(--text-faint);font-size:12px;font-style:italic;padding:14px 0;">No completed items yet.</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -373,8 +425,8 @@
   <!-- ── PROJECT HORIZON ACTIVE ────────────────────────────────── -->
   <div id="horizon-active" class="section">
     <button class="add-btn" onclick="openAddModal('horizon')">+ Add action item</button>
-    <div id="horizon-filter-bar" class="filter-bar"></div>
-    <div id="horizon-groups"></div>
+    <div id="horizon-filter-bar" class="filter-bar"><button class="filter-btn active">All</button><button class="filter-btn">Not started</button><button class="filter-btn">In-Progress</button><button class="filter-btn">On-Hold</button><button class="filter-btn">Parking Lot</button></div>
+    <div id="horizon-groups"><div class="section-group-header" style="color: var(--navy);">📅 Due This Week <span class="section-group-count">0</span></div><div class="card due-section-card due-week"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">Nothing due this week</div></div><div style="border-top: 2px solid var(--border); margin: 18px 0px 14px; position: relative;"><span style="position:absolute;top:-9px;left:0;background:var(--bg);padding-right:10px;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-faint);">By DD Section</span></div><div class="section-group-header"><span>Financial</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Legal</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Financing</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Real Estate</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>CPD</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>IT</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Operations / Supply Chain</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div><div class="section-group-header"><span>Sales &amp; Marketing</span><span class="section-group-count">0</span></div><div class="card" style="padding: 12px 16px 8px; margin-bottom: 8px;"><div style="font-size: 12px; color: var(--text-faint); padding: 4px 0px 6px; font-style: italic;">No active items</div></div></div>
   </div>
 
   <!-- ── PROJECT HORIZON COMPLETED ─────────────────────────────── -->
@@ -393,7 +445,7 @@
             <th style="width:29%">Notes</th>
             <th style="width:8%"></th>
           </tr></thead>
-          <tbody id="horizon-completed-body"></tbody>
+          <tbody id="horizon-completed-body"><tr><td colspan="6" style="color:var(--text-faint);font-size:12px;font-style:italic;padding:14px 0;">No completed items yet.</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -402,15 +454,15 @@
   <!-- ── Add Item Modal ─────────────────────────────────────────── -->
   <div class="modal-backdrop" id="add-modal" onclick="closeAddModal(event)">
     <div class="modal">
-      <div class="modal-title" id="add-modal-title">Add action item</div>
+      <div class="modal-title" id="add-modal-title">Project Chipotle — Add item</div>
       <div class="modal-field">
         <label class="modal-label">Action item</label>
-        <input class="modal-input" id="m-item" type="text" placeholder="Describe the action…" />
+        <input class="modal-input" id="m-item" type="text" placeholder="Describe the action…">
       </div>
       <div class="modal-row">
         <div class="modal-field">
           <label class="modal-label">DD Section</label>
-          <select class="modal-select" id="m-section"></select>
+          <select class="modal-select" id="m-section"><option value="Financial">Financial</option><option value="Legal">Legal</option><option value="Financing">Financing</option><option value="Real Estate">Real Estate</option><option value="CPD">CPD</option><option value="IT">IT</option><option value="Operations / Supply Chain">Operations / Supply Chain</option><option value="Sales &amp; Marketing">Sales &amp; Marketing</option></select>
         </div>
         <div class="modal-field">
           <label class="modal-label">Status</label>
@@ -442,16 +494,16 @@
         </div>
         <div class="modal-field">
           <label class="modal-label">Due date</label>
-          <input class="modal-input" id="m-due" type="text" placeholder="e.g. May 30" />
+          <input class="modal-input" id="m-due" type="text" placeholder="e.g. May 30">
         </div>
       </div>
       <div class="modal-field" id="m-owner-custom-wrap" style="display:none;">
         <label class="modal-label">Custom owner name</label>
-        <input class="modal-input" id="m-owner-custom" type="text" placeholder="Name…" />
+        <input class="modal-input" id="m-owner-custom" type="text" placeholder="Name…">
       </div>
       <div class="modal-field">
         <label class="modal-label">Notes</label>
-        <input class="modal-input" id="m-notes" type="text" placeholder="Context or next step…" />
+        <input class="modal-input" id="m-notes" type="text" placeholder="Context or next step…">
       </div>
       <div class="modal-actions">
         <button class="modal-btn-cancel" onclick="closeAddModal()">Cancel</button>
@@ -472,11 +524,11 @@ const PASSWORD     = 'bwfp2026';   // ← change this to your chosen password
 const STORE_KEY    = 'bwfp_dd_tracker_v1';
 
 // ── DD Sections ───────────────────────────────────────────────────
-const DD_SECTIONS  = ['Financial','Legal','Financing','Real Estate','CPD','IT','Operations / Supply Chain','Sales & Marketing'];
+const DD_SECTIONS  = ['Financial','Legal','Financing','Real Estate','CPD','IT','Operations / Supply Chain','Sales & Marketing','Misc'];
 const SECTION_COLORS = {
   'Financial':'badge-blue','Legal':'badge-red','Financing':'badge-navy',
   'Real Estate':'badge-amber','CPD':'badge-green','IT':'badge-teal',
-  'Operations / Supply Chain':'badge-gray','Sales & Marketing':'badge-amber'
+  'Operations / Supply Chain':'badge-gray','Sales & Marketing':'badge-amber','Misc':'badge-gray'
 };
 const STATUSES     = ['Not started','In-Progress','On-Hold','Parking Lot'];
 const STATUS_COLORS= {'Not started':'badge-gray','In-Progress':'badge-blue','On-Hold':'badge-amber','Parking Lot':'badge-navy','Complete':'badge-green'};
@@ -924,5 +976,5 @@ function init() {
 
 init();
 </script>
-</body>
-</html>
+
+<div data-lastpass-root="" style="position: absolute !important; top: 0px !important; left: 0px !important; height: 0px !important; width: 0px !important; display: initial !important;"></div></body></html>
