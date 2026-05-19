@@ -535,23 +535,81 @@ const STATUS_COLORS= {'Not started':'badge-gray','In-Progress':'badge-blue','On-
 const DEALS        = ['chipotle','horizon'];
 const DEFAULT_OWNERS = ['House','Banks','Arthur','Joel','Chris','Eric','Spencer','Jessica','Peter','Frank','Kurt'];
 
+// ── Supabase Config ──────────────────────────────────────────────
+const SUPABASE_URL = 'https://gytegxradoyljfoffndz.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Xc0Vp5NLRT-OFGB_GE-ELg_OwEnYUdu';
+const RECORD_ID    = 'bwfp-dd-tracker';
+const LOCAL_KEY    = STORE_KEY;
+let _supabaseAvailable = false;
+let _saveDebounce = null;
+
 // ── State ─────────────────────────────────────────────────────────
 let state = {};
 
-function loadState() {
-  try { const r = localStorage.getItem(STORE_KEY); state = r ? JSON.parse(r) : {}; }
+function loadLocalCache() {
+  try { const r = localStorage.getItem(LOCAL_KEY); state = r ? JSON.parse(r) : {}; }
   catch(e) { state = {}; }
 }
-function saveState() {
-  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); flashSave(); }
-  catch(e) {}
+
+function saveLocalCache() {
+  try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); } catch(e) {}
 }
+
+async function pushToSupabase() {
+  if (!_supabaseAvailable) return;
+  try {
+    await fetch(SUPABASE_URL + '/rest/v1/dd_tracker_state', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({ id: RECORD_ID, data: state })
+    });
+  } catch(e) { console.warn('Supabase save failed:', e); }
+}
+
+async function loadState() {
+  loadLocalCache(); // instant local load first
+  try {
+    const res = await fetch(
+      SUPABASE_URL + '/rest/v1/dd_tracker_state?id=eq.' + RECORD_ID + '&select=data',
+      { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } }
+    );
+    if (res.ok) {
+      const rows = await res.json();
+      if (rows.length > 0 && rows[0].data) {
+        state = rows[0].data;
+        saveLocalCache();
+        _supabaseAvailable = true;
+        renderAll();
+      } else {
+        _supabaseAvailable = true;
+        await pushToSupabase();
+      }
+    }
+  } catch(e) { console.warn('Supabase unavailable, using local cache:', e); }
+}
+
+function saveState() {
+  saveLocalCache();
+  flashSave();
+  clearTimeout(_saveDebounce);
+  _saveDebounce = setTimeout(pushToSupabase, 1500);
+}
+
 function flashSave() {
   const el = document.getElementById('save-status');
   if(!el) return;
-  el.textContent = 'Saving…'; el.classList.add('saving');
+  el.textContent = _supabaseAvailable ? 'Saving…' : 'Saved locally';
+  el.classList.add('saving');
   clearTimeout(window._st);
-  window._st = setTimeout(()=>{ el.textContent='All changes saved'; el.classList.remove('saving'); }, 800);
+  window._st = setTimeout(()=>{
+    el.textContent = _supabaseAvailable ? 'All changes saved' : 'Saved locally (offline)';
+    el.classList.remove('saving');
+  }, 1000);
 }
 
 let saveTimer;
@@ -966,12 +1024,17 @@ document.addEventListener('keydown', e=>{
   }
 });
 
-// ── Init ──────────────────────────────────────────────────────────
-function init() {
-  initAuth();
-  loadState();
-  initTodayLabel();
+// ── Render all ────────────────────────────────────────────────────
+function renderAll() {
   DEALS.forEach(d=>{ renderDeal(d); renderCompleted(d); });
+}
+
+// ── Init ──────────────────────────────────────────────────────────
+async function init() {
+  initAuth();
+  initTodayLabel();
+  await loadState();
+  if (!_supabaseAvailable) renderAll();
 }
 
 init();
